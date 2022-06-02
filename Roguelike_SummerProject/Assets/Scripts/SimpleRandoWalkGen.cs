@@ -5,4 +5,5 @@ using UnityEngine;
 public class SimpleRandoWalkGen : MonoBehaviour
 {
     protected Vector2Int startPos = Vector2Int.zero;
+    
 }
