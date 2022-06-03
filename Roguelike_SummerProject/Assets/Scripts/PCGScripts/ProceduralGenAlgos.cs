@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//reference: https://www.youtube.com/watch?v=-QOCX6SVFsk&list=PLcRSafycjWFenI87z7uZHFv6cUG2Tzu9v
 public static class ProceduralGenAlgos
 {
     public static HashSet<Vector2Int> SimpleRandomWalk(Vector2Int startPos, int walkLen){
@@ -16,6 +17,21 @@ public static class ProceduralGenAlgos
             prevPos = newPos;
         }
         return path;
+    }
+
+    //list because we want to keep track of last item added to keep corridors connected linearly
+    public static List<Vector2Int> RandomWalkCorridor(Vector2Int startPos, int corridorLen){
+        List<Vector2Int> corridor = new List<Vector2Int>();
+        var dir = Direction2D.GetRandoCardinalDir();
+        var currentPos = startPos;
+        corridor.Add(currentPos);
+
+        for (int i = 0; i < corridorLen; i++)
+        {
+            currentPos += dir;
+            corridor.Add(currentPos);
+        }
+        return corridor;
     }
 }
 
