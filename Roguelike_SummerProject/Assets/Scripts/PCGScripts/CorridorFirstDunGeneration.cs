@@ -8,6 +8,9 @@ public class CorridorFirstDunGeneration : SimpleRandoWalkGen
     [SerializeField] private int corridorLen = 14, corridorCount = 5;
     [SerializeField] [Range(0.1f,1)] private float roomPercent = .8f;   //percent of rooms we can create
 
+    private Dictionary<Vector2Int, HashSet<Vector2Int>> roomDictionary = new Dictionary<Vector2Int, HashSet<Vector2Int>>();
+    private HashSet<Vector2Int> floorPos, corridorPos;
+
     protected override void RunProceduralGeneration()
     {
         CorridorFirstGen();
@@ -52,6 +55,7 @@ public class CorridorFirstDunGeneration : SimpleRandoWalkGen
             potentialRoomPos.Add(currentPos);
             floorPos.UnionWith(corridor);
         }
+        corridorPos = new HashSet<Vector2Int>(floorPos);
     }
 
     private HashSet<Vector2Int> CreateRooms(HashSet<Vector2Int> potentialRoomPos){
@@ -60,12 +64,27 @@ public class CorridorFirstDunGeneration : SimpleRandoWalkGen
 
         List<Vector2Int> roomsToCreate = potentialRoomPos.OrderBy(x => Random.Range(-100,100)).Take(roomToCreateCount).ToList();
 
+        clearRoomData();
+
         foreach (var roomPos in roomsToCreate)
         {
             var roomFloor = RunRandomWalk(randomWalkParameters, roomPos);
+
+            SaveRoomData(roomPos, roomFloor);
+
             roomPositions.UnionWith(roomFloor);
         }
         return roomPositions;
+    }
+
+    private void SaveRoomData(Vector2Int roomPos, HashSet<Vector2Int> roomFloor)
+    {
+        roomDictionary[roomPos] = roomFloor;
+    }
+
+    private void clearRoomData()
+    {
+        roomDictionary.Clear();
     }
 
     private List<Vector2Int> FindAllDeadEnds(HashSet<Vector2Int> floorPositions){
