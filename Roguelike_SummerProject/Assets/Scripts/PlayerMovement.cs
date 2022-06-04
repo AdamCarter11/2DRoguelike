@@ -8,13 +8,12 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 originPos, targetPos;
     [SerializeField] private float timeToMove = 0.2f;   //.2 is 1/5 a second to move from one point to another
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
+        Movement();
+    }
+ 
+    private void Movement(){
         if(Input.GetKey(KeyCode.W) && !isMoving){
            StartCoroutine(MovePlayer(Vector3.up));
         }
