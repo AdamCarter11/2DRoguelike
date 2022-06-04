@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SimpleRandomWalkParamaters_",menuName = "PCG/SimpleRandomWalkData")]
+[CreateAssetMenu(fileName = "SRWP_",menuName = "PCG/SimpleRandomWalkData")]
 public class SimpleRandomWalkSO : ScriptableObject
 {
     public int iterations = 10, walkLen = 10;

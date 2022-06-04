@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6cfdee36973953b4596000b7ce0ac170, type: 3}
-  m_Name: SimpleRandomWalkParamaters_Island
+  m_Name: SRWP_SmallDungeon
   m_EditorClassIdentifier: 
-  iterations: 50
-  walkLen: 50
-  startRandomlyEachIteration: 0
+  iterations: 20
+  walkLen: 10
+  startRandomlyEachIteration: 1
