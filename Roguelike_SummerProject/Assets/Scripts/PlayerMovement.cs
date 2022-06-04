@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    /*
     private bool isMoving;
     private Vector3 originPos, targetPos;
     [SerializeField] private float timeToMove = 0.2f;   //.2 is 1/5 a second to move from one point to another
@@ -45,6 +46,29 @@ public class PlayerMovement : MonoBehaviour
 
         isMoving = false;
     }
+    */
 
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private Transform movePoint;
+    [SerializeField] private LayerMask whatStopsMovement;
 
+    private void Start() {
+        movePoint.parent = null;
+    }
+    private void Update() {
+        transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
+        if(Vector3.Distance(transform.position, movePoint.position) <= .05f){
+            if(Mathf.Abs(Input.GetAxisRaw("Horizontal")) == 1f){
+                if(!Physics2D.OverlapCircle(movePoint.position + new Vector3(Input.GetAxisRaw("Horizontal"), 0f,0f), .2f, whatStopsMovement)){
+                    movePoint.position += new Vector3(Input.GetAxisRaw("Horizontal"), 0f, 0f);
+                    print("TEST");
+                } 
+            }
+            else if(Mathf.Abs(Input.GetAxisRaw("Vertical")) == 1f){
+                if(!Physics2D.OverlapCircle(movePoint.position + new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f), .2f, whatStopsMovement)){
+                    movePoint.position += new Vector3(0f, Input.GetAxisRaw("Vertical"), 0f);
+                }
+            }
+        }
+    }
 }
