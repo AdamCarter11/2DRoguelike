@@ -20,8 +20,6 @@ public class CreateGrid : MonoBehaviour
     
     public List<WorldTile> path = new List<WorldTile>();
 
-    [SerializeField] private GameObject target;
-
     void Start()
     {
         gridSizeX = Mathf.Abs(scanStartX) + Mathf.Abs(scanFinishX);
