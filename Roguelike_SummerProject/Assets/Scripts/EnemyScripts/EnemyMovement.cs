@@ -14,16 +14,19 @@ public class EnemyMovement : MonoBehaviour
     public LayerMask stopMovementMask;
     public float moveSpeed;
     private Vector2 movement;
+
+    public CreateGrid gridPath;
+
     // Start is called before the first frame update
     void Start()
     {
         movePoint.parent = null;
-        path2 = CreateGrid.path;
     }
 
     // Update is called once per frame
     void Update()
     {
+        path2 = gridPath.path;
         MovementPerformed();
     }
 

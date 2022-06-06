@@ -18,7 +18,9 @@ public class CreateGrid : MonoBehaviour
     public GameObject[,]     nodes;           // sorted 2d array of nodes, may contain null entries if the map is of an odd shape e.g. gaps
     private int gridBoundX = 0, gridBoundY = 0;
     
-    public static List<WorldTile> path = new List<WorldTile>();
+    public List<WorldTile> path = new List<WorldTile>();
+
+    [SerializeField] private GameObject target;
 
     void Start()
     {
@@ -26,7 +28,7 @@ public class CreateGrid : MonoBehaviour
         gridSizeY = Mathf.Abs(scanStartY) + Mathf.Abs(scanFinishY);
         createGrid();
 
-        FindPath(new Vector3(5,5,0), new Vector3(0,0,0));
+        FindPath(new Vector3(1.5f, 1.5f, 0), new Vector3(4.5f,4.5f,0));
     }
 
     public List<WorldTile> getNeighbours(int x, int y, int width, int height)
@@ -200,7 +202,6 @@ public class CreateGrid : MonoBehaviour
                    
                     wt.gridX = gridX; wt.gridY = gridY; wt.cellX = cellPosition.x; wt.cellY = cellPosition.y;
                     node.transform.parent = gridNode.transform;
-    
                     if (!foundObstacle) {
                         foundTileOnLastPass = true;
                         node.name = "Walkable_" + gridX.ToString() + "_" + gridY.ToString();
@@ -233,11 +234,12 @@ public class CreateGrid : MonoBehaviour
         foreach (GameObject g in unsortedNodes) { 
             WorldTile wt = g.GetComponent<WorldTile>();
             nodes[wt.gridX, wt.gridY] = g;
+            
         }
-    
+        
         for (int x = 0; x < gridBoundX; x++) {
             for (int y = 0; y < gridBoundY; y++) {
-                if (nodes[x, y] != null) { 
+                if (nodes[x, y] != null) {
                     WorldTile wt = nodes[x, y].GetComponent<WorldTile>(); 
                     wt.myNeighbours = getNeighbours(x, y, gridBoundX, gridBoundY);
                 }
@@ -254,7 +256,6 @@ public class CreateGrid : MonoBehaviour
             for (int y = 0; y < gridBoundY; y++) {
                 if (nodes[x, y] != null) {
                     WorldTile _wt = nodes[x, y].GetComponent<WorldTile>();
-                        
                     // we are interested in walkable cells only
                     if (_wt.walkable && _wt.cellX == cellPosition.x && _wt.cellY == cellPosition.y) {
                         wt = _wt;
@@ -265,6 +266,7 @@ public class CreateGrid : MonoBehaviour
                 }
             }
         }
+        
         return wt;
     }
 
@@ -282,9 +284,10 @@ public class CreateGrid : MonoBehaviour
     {
         List<WorldTile> path = new List<WorldTile>();
         WorldTile currentNode = targetNode;
-    
+        
         while(currentNode != startNode) {
             path.Add(currentNode);
+            
             currentNode = currentNode.parent;
         }
     
@@ -314,10 +317,13 @@ public class CreateGrid : MonoBehaviour
     
             openSet.Remove(currentNode);
             closedSet.Add(currentNode);
-    
+
+            //print(targetNode.gridX);
+
             if (currentNode == targetNode)
             {
                 path = RetracePath(startNode, targetNode);
+
                 return;
             }
     

@@ -101,6 +101,6 @@ MonoBehaviour:
   gridY: 0
   cellX: 0
   cellY: 0
-  walkable: 0
+  walkable: 1
   myNeighbours: []
   parent: {fileID: 0}
