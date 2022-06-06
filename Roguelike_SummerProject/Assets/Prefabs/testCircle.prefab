@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8158247868001654046}
   - component: {fileID: 4325541225956588712}
+  - component: {fileID: -4081615892027039540}
   m_Layer: 0
   m_Name: testCircle
   m_TagString: Untagged
@@ -70,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: 538f8378351212148962fe2555b71c42, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -82,3 +83,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-4081615892027039540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6128003078333370810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c17b9fcbbe3218d4e8192ae01f81399c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gCost: 0
+  hCost: 0
+  gridX: 0
+  gridY: 0
+  cellX: 0
+  cellY: 0
+  walkable: 0
+  myNeighbours: []
+  parent: {fileID: 0}

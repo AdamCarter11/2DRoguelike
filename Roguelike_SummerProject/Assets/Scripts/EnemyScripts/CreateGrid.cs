@@ -14,7 +14,7 @@ public class CreateGrid : MonoBehaviour
     //these are the bounds of where we are searching in the world for tiles, have to use world coords to check for tiles in the tile map
     public int scanStartX = -300, scanStartY = -300, scanFinishX = 300, scanFinishY = 300, gridSizeX, gridSizeY;
  
-    private List<GameObject> unsortedNodes;   // all the nodes in the world
+    private List<GameObject> unsortedNodes = new List<GameObject>();   // all the nodes in the world
     public GameObject[,]     nodes;           // sorted 2d array of nodes, may contain null entries if the map is of an odd shape e.g. gaps
     private int gridBoundX = 0, gridBoundY = 0;
 
@@ -22,6 +22,8 @@ public class CreateGrid : MonoBehaviour
     {
         gridSizeX = Mathf.Abs(scanStartX) + Mathf.Abs(scanFinishX);
         gridSizeY = Mathf.Abs(scanStartY) + Mathf.Abs(scanFinishY);
+
+        print(unsortedNodes.Count);
 
         createGrid();
     }
@@ -194,6 +196,7 @@ public class CreateGrid : MonoBehaviour
                     GameObject node = (GameObject)Instantiate(nodePrefab, worldPosition, Quaternion.Euler(0, 0, 0));
                     Vector3Int cellPosition = floor.WorldToCell(worldPosition);
                     WorldTile wt = node.GetComponent<WorldTile>();
+                   
                     wt.gridX = gridX; wt.gridY = gridY; wt.cellX = cellPosition.x; wt.cellY = cellPosition.y;
                     node.transform.parent = gridNode.transform;
     
@@ -206,7 +209,6 @@ public class CreateGrid : MonoBehaviour
                         wt.walkable = false;
                         node.GetComponent<SpriteRenderer>().color = Color.red;
                     }
-    
                     unsortedNodes.Add(node);
     
                     gridY++; 
