@@ -20,6 +20,8 @@ public class CreateGrid : MonoBehaviour
     
     public List<WorldTile> path = new List<WorldTile>();
 
+    private float changeBy = 1f;
+
     void Start()
     {
         gridSizeX = Mathf.Abs(scanStartX) + Mathf.Abs(scanFinishX);
@@ -28,7 +30,11 @@ public class CreateGrid : MonoBehaviour
 
         FindPath(new Vector3(1.5f, 1.5f, 0), new Vector3(4.5f,4.5f,0));
     }
-
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.Tab)){
+            FindPath(new Vector3(1.5f + changeBy, 1.5f + changeBy, 0), new Vector3(4.5f + changeBy,4.5f + changeBy,0));
+        }
+    }
     public List<WorldTile> getNeighbours(int x, int y, int width, int height)
     {
         List<WorldTile> myNeighbours = new List<WorldTile>();

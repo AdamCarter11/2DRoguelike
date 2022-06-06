@@ -26,7 +26,10 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        path2 = gridPath.path;
+        if(Input.GetKeyDown(KeyCode.E)){
+            print(gridPath.path.Count);
+            path2 = gridPath.path;
+        }
         MovementPerformed();
     }
 
@@ -65,7 +68,6 @@ public class EnemyMovement : MonoBehaviour
         {
             if (path2.Count > 0)
             {
-                print("TEST");
                 if (!moveDone)
                 {
                     for (int i = 0; i < path2.Count; i++)
@@ -75,11 +77,13 @@ public class EnemyMovement : MonoBehaviour
                     }
                     WorldTile wt = reachedPathTiles[reachedPathTiles.Count - 1];
                     lastDirection = new Vector3(Mathf.Ceil(wt.cellX - transform.position.x), Mathf.Ceil(wt.cellY - transform.position.y), 0);
+                    print(lastDirection);
                     if (lastDirection.Equals(Vector3.up)) movement.y = 1;
                     if (lastDirection.Equals(Vector3.down)) movement.y = -1;
                     if (lastDirection.Equals(Vector3.left)) movement.x = -1;
                     if (lastDirection.Equals(Vector3.right)) movement.x = 1;
                     moveDone = true;
+                    
                 }
                 else
                 {
