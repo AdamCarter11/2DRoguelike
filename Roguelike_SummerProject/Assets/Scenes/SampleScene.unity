@@ -5399,9 +5399,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 657f84a404546f74a94aaeefa454f2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridBase: {fileID: 556050863}
+  floor: {fileID: 21511827}
   obstacleLayers:
   - {fileID: 1104858284}
-  gridNode: {fileID: 21511826}
+  gridNode: {fileID: 556050861}
   nodePrefab: {fileID: 6128003078333370810, guid: 806bfed512e2c3f4e93b8e214b571887, type: 3}
   scanStartX: -2
   scanStartY: -2

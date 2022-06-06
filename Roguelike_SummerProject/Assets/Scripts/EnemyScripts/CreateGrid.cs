@@ -5,8 +5,8 @@ using UnityEngine.Tilemaps;
 
 public class CreateGrid : MonoBehaviour
 {
-    Grid gridBase;
-    Tilemap floor;                         // walkable tilemap
+    public Grid gridBase;
+    public Tilemap floor;                         // walkable tilemap
     public List<Tilemap> obstacleLayers;   // all layers that contain objects to navigate around
     public GameObject gridNode;            // where the generated tiles will be stored
     public GameObject nodePrefab;          // world tile prefab
