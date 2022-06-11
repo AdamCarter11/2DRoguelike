@@ -302,7 +302,7 @@ public class CreateGrid : MonoBehaviour
         return path;
     }
 
-    void FindPath(Vector3 startPosition, Vector3 endPosition)
+    public void FindPath(Vector3 startPosition, Vector3 endPosition)
     {
         WorldTile startNode = GetWorldTileByCellPosition(startPosition);
         WorldTile targetNode = GetWorldTileByCellPosition(endPosition);

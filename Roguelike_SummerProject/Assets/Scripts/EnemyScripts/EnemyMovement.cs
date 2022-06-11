@@ -17,6 +17,9 @@ public class EnemyMovement : MonoBehaviour
 
     public CreateGrid gridPath;
 
+    [SerializeField] private CreateGrid createGridScript;
+
+    [SerializeField] private GameObject target;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,17 +28,15 @@ public class EnemyMovement : MonoBehaviour
         //testing code
         Vector3 testVec = new Vector3(.5f,0,0);
         print(testVec.Equals(Vector3.right));
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.E)){
+            gridPath.FindPath(transform.position, target.transform.position);
             path2 = gridPath.path;
-            for (int i = 0; i < path2.Count; i++)
-            {
-                //print(path2[i]);
-            }
         }
         MovementPerformed();
     }

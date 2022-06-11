@@ -3970,7 +3970,7 @@ GameObject:
   m_Component:
   - component: {fileID: 647313628}
   - component: {fileID: 647313629}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4041,7 +4041,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 717395784}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: movePoint
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -5789,9 +5789,11 @@ MonoBehaviour:
   movePoint: {fileID: 1628119091}
   stopMovementMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 192
   moveSpeed: 1
   gridPath: {fileID: 1227599635}
+  createGridScript: {fileID: 1227599635}
+  target: {fileID: 1700526137}
 --- !u!61 &1180102863
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6203,7 +6205,7 @@ GameObject:
   - component: {fileID: 1700526138}
   - component: {fileID: 1700526141}
   - component: {fileID: 1700526142}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
