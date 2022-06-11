@@ -21,6 +21,10 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         movePoint.parent = null;
+
+        //testing code
+        Vector3 testVec = new Vector3(.5f,0,0);
+        print(testVec.Equals(Vector3.right));
     }
 
     // Update is called once per frame
@@ -28,7 +32,10 @@ public class EnemyMovement : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.E)){
             path2 = gridPath.path;
-            print(gridPath.path.Count);
+            for (int i = 0; i < path2.Count; i++)
+            {
+                //print(path2[i]);
+            }
         }
         MovementPerformed();
     }
@@ -37,29 +44,32 @@ public class EnemyMovement : MonoBehaviour
         SetMovementVector();
         
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.fixedDeltaTime);
- 
+        //transform.position = movePoint.position;
+
         if (Vector3.Distance(transform.position, movePoint.position) <= .001f)
         {
             if (Mathf.Abs(movement.x) == 1f)
             {
                 // we add 0.5f to 'y' component of the 'position'
                 // to account the bottom pivot point of the sprite
-                if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(movement.x, 0.5f, 0f), .2f, stopMovementMask))
+                if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(movement.x, 0f , 0f), .2f, stopMovementMask))
                 {
                     movePoint.position += new Vector3(movement.x, 0f, 0f);
+                    //print("X: " + movePoint.position);
                 }
             } 
             else if (Mathf.Abs(movement.y) == 1f)
             {
                 // we add 0.5f to 'y' component of the 'position'
                 // to account the bottom pivot point of the sprite
-                if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0, movement.y + 0.5f, 0f), .2f, stopMovementMask))
+                if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0, movement.y, 0f), .2f, stopMovementMask))
                 {
                     movePoint.position += new Vector3(0f, movement.y, 0f); 
+                    //print("Y: " + movePoint.position);
                 }
             }
         }
-        
+        //print(Vector3.Distance(transform.position, movePoint.position));
     }
 
     void SetMovementVector()
@@ -77,12 +87,20 @@ public class EnemyMovement : MonoBehaviour
                     }
                     WorldTile wt = reachedPathTiles[reachedPathTiles.Count - 1];
                     lastDirection = new Vector3(Mathf.Ceil(wt.cellX - transform.position.x), Mathf.Ceil(wt.cellY - transform.position.y), 0);
+                    print(lastDirection);
+                    if (lastDirection.y >= 1) movement.y = 1;
+                    if (lastDirection.y <= -1) movement.y = -1;
+                    if (lastDirection.x <= -1) movement.x = -1;
+                    if (lastDirection.x >= 1) movement.x = 1;
+                    moveDone = true;
+
+                    /*
+                    //origionally replaced lines 91-94
                     if (lastDirection.Equals(Vector3.up)) movement.y = 1;
                     if (lastDirection.Equals(Vector3.down)) movement.y = -1;
                     if (lastDirection.Equals(Vector3.left)) movement.x = -1;
                     if (lastDirection.Equals(Vector3.right)) movement.x = 1;
-                    moveDone = true;
-                    
+                    */
                 }
                 else
                 {
