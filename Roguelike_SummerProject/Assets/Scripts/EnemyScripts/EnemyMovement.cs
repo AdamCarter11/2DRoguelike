@@ -27,7 +27,7 @@ public class EnemyMovement : MonoBehaviour
 
         //testing code
         Vector3 testVec = new Vector3(.5f,0,0);
-        print(testVec.Equals(Vector3.right));
+        //print(testVec.Equals(Vector3.right));
         
     }
 
@@ -37,6 +37,7 @@ public class EnemyMovement : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.E)){
             gridPath.FindPath(transform.position, target.transform.position);
             path2 = gridPath.path;
+            print(path2.Count);
         }
         MovementPerformed();
     }
@@ -53,7 +54,7 @@ public class EnemyMovement : MonoBehaviour
             {
                 // we add 0.5f to 'y' component of the 'position'
                 // to account the bottom pivot point of the sprite
-                if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(movement.x, 0f , 0f), .2f, stopMovementMask))
+                if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(movement.x, 0f , 0f), .1f, stopMovementMask))
                 {
                     movePoint.position += new Vector3(movement.x, 0f, 0f);
                     //print("X: " + movePoint.position);
@@ -63,7 +64,7 @@ public class EnemyMovement : MonoBehaviour
             {
                 // we add 0.5f to 'y' component of the 'position'
                 // to account the bottom pivot point of the sprite
-                if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0, movement.y, 0f), .2f, stopMovementMask))
+                if (!Physics2D.OverlapCircle(movePoint.position + new Vector3(0, movement.y, 0f), .1f, stopMovementMask))
                 {
                     movePoint.position += new Vector3(0f, movement.y, 0f); 
                     //print("Y: " + movePoint.position);
@@ -88,7 +89,7 @@ public class EnemyMovement : MonoBehaviour
                     }
                     WorldTile wt = reachedPathTiles[reachedPathTiles.Count - 1];
                     lastDirection = new Vector3(Mathf.Ceil(wt.cellX - transform.position.x), Mathf.Ceil(wt.cellY - transform.position.y), 0);
-                    print(lastDirection);
+                    //print(lastDirection);
                     if (lastDirection.y >= 1) movement.y = 1;
                     if (lastDirection.y <= -1) movement.y = -1;
                     if (lastDirection.x <= -1) movement.x = -1;

@@ -6172,7 +6172,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1628119091}
   m_Layer: 8
-  m_Name: GameObject
+  m_Name: enemyFeet
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -6205,6 +6205,7 @@ GameObject:
   - component: {fileID: 1700526138}
   - component: {fileID: 1700526141}
   - component: {fileID: 1700526142}
+  - component: {fileID: 1700526143}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -6343,6 +6344,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1700526143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700526137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 577d37d7f2b8e49489a68628ab4b0690, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ability: {fileID: 11400000, guid: c83382ccd8f281949bd5faba88500539, type: 2}
+  key: 105
 --- !u!1 &1712865434
 GameObject:
   m_ObjectHideFlags: 0
