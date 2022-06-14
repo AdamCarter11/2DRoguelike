@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIScript : MonoBehaviour
 {
@@ -11,5 +12,12 @@ public class UIScript : MonoBehaviour
     }
     public void CloseSkillTree(){
         skillTreePanel.SetActive(false);
+    }
+    
+    public void LoadTestScene(){
+        SceneManager.LoadScene("TestScene2");
+    }
+    public void LoadSampleScene(){
+        SceneManager.LoadScene("SampleScene");
     }
 }
