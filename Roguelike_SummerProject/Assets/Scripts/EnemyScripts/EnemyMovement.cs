@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     Vector3 lastDirection = Vector3.zero;
-    bool moveDone = true;   
+    [SerializeField] bool moveDone = true;   
     List<WorldTile> reachedPathTiles = new List<WorldTile>(); 
     List<WorldTile> path2 = new List<WorldTile>();
 
@@ -20,6 +20,11 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private CreateGrid createGridScript;
 
     [SerializeField] private GameObject target;
+
+    public WorldTile nextTile, breakatTile;
+    [SerializeField] private float threshold = .85f;
+    [SerializeField] private float closestDist = .3f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +43,9 @@ public class EnemyMovement : MonoBehaviour
             gridPath.FindPath(transform.position, target.transform.position);
             path2 = gridPath.path;
             moveDone = false;
+            nextTile = path2[0];
+            nextTile.SetColor(WorldTile.NodeState.Next);
+            breakatTile = null;
             print(path2.Count);
         }
         MovementPerformed();
@@ -86,9 +94,12 @@ public class EnemyMovement : MonoBehaviour
                     for (int i = 0; i < path2.Count; i++)
                     {
                         if (reachedPathTiles.Contains(path2[i])) continue;
-                        else reachedPathTiles.Add(path2[i]); break;
+                        else if(reachedPathTiles.Count == 0 || Vector2.Distance(transform.position, nextTile.transform.position) <= threshold) reachedPathTiles.Add(path2[i]); break;
                     }
                     WorldTile wt = reachedPathTiles[reachedPathTiles.Count - 1];
+                    wt.SetColor(WorldTile.NodeState.Next);
+                    nextTile = wt;
+                    if(Vector2.Distance(transform.position, nextTile.transform.position) <= closestDist) { breakatTile = wt; }
                     lastDirection = new Vector3(Mathf.Ceil(wt.cellX - transform.position.x), Mathf.Ceil(wt.cellY - transform.position.y), 0);
                     //print(lastDirection);
                     if (lastDirection.y >= 1) movement.y = 1;

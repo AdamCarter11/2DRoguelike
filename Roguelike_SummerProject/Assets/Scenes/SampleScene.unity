@@ -6610,6 +6610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0421613026bc1d4e83d2127d2762670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveDone: 1
   movePoint: {fileID: 1628119091}
   stopMovementMask:
     serializedVersion: 2
@@ -6618,6 +6619,10 @@ MonoBehaviour:
   gridPath: {fileID: 1227599635}
   createGridScript: {fileID: 1227599635}
   target: {fileID: 1700526137}
+  nextTile: {fileID: 0}
+  breakatTile: {fileID: 0}
+  threshold: 0.85
+  closestDist: 0.3
 --- !u!61 &1180102863
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6831,7 +6836,7 @@ MonoBehaviour:
   obstacleLayers:
   - {fileID: 1104858284}
   gridNode: {fileID: 556050861}
-  nodePrefab: {fileID: 6128003078333370810, guid: 806bfed512e2c3f4e93b8e214b571887, type: 3}
+  nodePrefab: {fileID: 356296390067058005, guid: 9dd7f58fce6760f478141e52d799b2bb, type: 3}
   scanStartX: -100
   scanStartY: -100
   scanFinishX: 100

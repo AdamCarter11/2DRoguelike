@@ -28,7 +28,7 @@ public class CreateGrid : MonoBehaviour
         gridSizeY = Mathf.Abs(scanStartY) + Mathf.Abs(scanFinishY);
         createGrid();
 
-        FindPath(new Vector3(-1.5f, -1.5f, 0), new Vector3(4.5f,6.5f,0));
+        //FindPath(new Vector3(-1.5f, -1.5f, 0), new Vector3(4.5f,6.5f,0));
     }
     
     private void Update() {
@@ -289,17 +289,17 @@ public class CreateGrid : MonoBehaviour
 
     List<WorldTile> RetracePath(WorldTile startNode, WorldTile targetNode)
     {
-        List<WorldTile> path = new List<WorldTile>();
+        List<WorldTile> retracePath = new List<WorldTile>();
         WorldTile currentNode = targetNode;
         
         while(currentNode != startNode) {
-            path.Add(currentNode);
+            retracePath.Add(currentNode);
             
             currentNode = currentNode.parent;
         }
     
-        path.Reverse();
-        return path;
+        retracePath.Reverse();
+        return retracePath;
     }
 
     public void FindPath(Vector3 startPosition, Vector3 endPosition)
@@ -309,44 +309,59 @@ public class CreateGrid : MonoBehaviour
     
         List<WorldTile> openSet = new List<WorldTile>();
         HashSet<WorldTile> closedSet = new HashSet<WorldTile>();
+        
         openSet.Add(startNode);
     
         while (openSet.Count > 0)
         {
             WorldTile currentNode = openSet[0];
+            //print("CURRENT NODE: "  + currentNode);
             for (int i = 1; i < openSet.Count; i++)
             {
                 if (openSet[i].fCost < currentNode.fCost || openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost)
                 {
                     currentNode = openSet[i];
+                    //currentNode.SetColor(WorldTile.NodeState.Next);
                 }
             }
     
             openSet.Remove(currentNode);
             closedSet.Add(currentNode);
-
+            print("REMOVED OPEN: " + currentNode.name + "|" + currentNode.gCost);
             //print(targetNode.gridX);
-
+            WorldTile.ResetColor();
             if (currentNode == targetNode)
             {
                 path = RetracePath(startNode, targetNode);
-
+                //path[0].SetColor(WorldTile.NodeState.Next);
+                for (int i = 1; i < path.Count; i++)
+                {
+                    path[i].SetColor(WorldTile.NodeState.OnPath);
+                }
+                print("CURRENT AND TARGET SAME: " + currentNode.name);
                 return;
             }
     
             foreach (WorldTile neighbour in currentNode.myNeighbours) {
-                if (!neighbour.walkable || closedSet.Contains(neighbour)) continue;
-    
+                
+                if (!neighbour.walkable || closedSet.Contains(neighbour)){
+                    print("Skipping node:" + neighbour.name + "|" + neighbour.gCost + "|" + neighbour.hCost);
+                    continue;
+                } 
+
+                //print(neighbour.name + "|" + neighbour.gCost + "|" + neighbour.hCost);
+
                 int newMovementCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour);
+                
                 if(newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
                 {
                     neighbour.gCost = newMovementCostToNeighbour;
                     neighbour.hCost = GetDistance(neighbour, targetNode);
                     neighbour.parent = currentNode;
-    
                     if (!openSet.Contains(neighbour))
                         openSet.Add(neighbour);
                 }
+                print(neighbour.name + "|" + neighbour.gCost + "|" + neighbour.hCost);
             }
         }
     }
