@@ -24,8 +24,8 @@ public class SkillTree : MonoBehaviour
 
     private void Start() {
         skillPoints = 20;
-        skillLevels = new int[6]; //6 skills
-        skillCaps = new int[] {1,5,5,2,10,10}; //skill caps per level
+        skillLevels = new int[6]; //6 skills and their default levels set to zero
+        skillCaps = new int[] {1,5,5,2,10,10}; //skill caps per level in order
         skillNames = new[] {"skill ONE", "skill TWO", "skill THREE", "skill FOUR", "skill FIVE", "skill SIX"};
         skillDescs = new[]
         {
@@ -37,7 +37,7 @@ public class SkillTree : MonoBehaviour
             "desc SIX",
         };
 
-        //adds skills to the list of skills (make sure the skills are children of something)
+        //adds skills/connectors to the list of skills/connectors (make sure the skills are children of something)
         foreach (var skill in skillHolder.GetComponentsInChildren<Skill>()){
             skillList.Add(skill);
         }

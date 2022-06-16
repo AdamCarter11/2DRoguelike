@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     Vector3 lastDirection = Vector3.zero;
-    bool moveDone = false;   
+    bool moveDone = true;   
     List<WorldTile> reachedPathTiles = new List<WorldTile>(); 
     List<WorldTile> path2 = new List<WorldTile>();
 
@@ -37,6 +37,7 @@ public class EnemyMovement : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.E)){
             gridPath.FindPath(transform.position, target.transform.position);
             path2 = gridPath.path;
+            moveDone = false;
             print(path2.Count);
         }
         MovementPerformed();
@@ -107,7 +108,7 @@ public class EnemyMovement : MonoBehaviour
                 else
                 {
                     movement = Vector2.zero;
-                    if (Vector3.Distance(transform.position, movePoint.position) <= .001f)
+                    if (Vector3.Distance(transform.position, movePoint.position) <= .1f)
                         moveDone = false;
                 }
             }
