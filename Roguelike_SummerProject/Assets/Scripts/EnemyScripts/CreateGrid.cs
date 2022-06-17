@@ -27,7 +27,12 @@ public class CreateGrid : MonoBehaviour
         gridSizeX = Mathf.Abs(scanStartX) + Mathf.Abs(scanFinishX);
         gridSizeY = Mathf.Abs(scanStartY) + Mathf.Abs(scanFinishY);
         createGrid();
-
+        /*
+        foreach (var item in nodes)
+        {
+            print(item);
+        }
+        */
         //FindPath(new Vector3(-1.5f, -1.5f, 0), new Vector3(4.5f,6.5f,0));
     }
     
